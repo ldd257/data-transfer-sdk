@@ -51,7 +51,7 @@ public class DataGeneratorContext {
     private MyRequestUtils myRequestUtils;
 
     /**
-     * 数据序列
+     * 数据序列.
      */
     private DataSeq dataSeq = new DataSeq();
 
