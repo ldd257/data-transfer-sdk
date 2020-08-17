@@ -1,0 +1,6 @@
+/bin/
+/.idea/
+/target/
+/db/
+.DS_Store
+target
