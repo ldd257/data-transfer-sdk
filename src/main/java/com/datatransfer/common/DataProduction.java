@@ -18,11 +18,9 @@ import java.util.Map;
  * @email ldd@gmail.com
  * @date 2020-08-11 13:37:16
  */
-@Component
 public class DataProduction {
 
-    @Autowired
-    private MyRequestUtils myRequestUtils;
+    private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
     private TfProductEntity tfProductEntity;
     private GeneratorForm2 generatorForm;

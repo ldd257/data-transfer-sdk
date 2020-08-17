@@ -5,7 +5,6 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 
 import cn.hutool.json.JSONUtil;
-import com.datatransfer.config.TransferConfig;
 import com.datatransfer.entity.TfGeneratorEntity;
 import com.datatransfer.entity.TfProductEntity;
 import com.datatransfer.entity.TfSequenceEntity;
@@ -44,11 +43,9 @@ import static org.springframework.util.StreamUtils.BUFFER_SIZE;
  */
 @Data
 @Component
-@SpringBootConfiguration
 public class DataGeneratorContext {
 
-    @Resource
-    private MyRequestUtils myRequestUtils;
+    private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
     /**
      * 数据序列.

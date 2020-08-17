@@ -8,11 +8,9 @@
 
 package com.datatransfer.form;
 
-import com.cngc.boot.web.dictionary.translate.DictTranslator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -1,9 +1,6 @@
 import cn.hutool.json.JSONUtil;
-import com.datatransfer.common.DataGeneratorContext;
-import com.datatransfer.common.DataPackage;
-import com.datatransfer.common.DataProduction;
-import com.datatransfer.common.DataSeq;
-import com.datatransfer.config.TransferConfig;
+import com.datatransfer.common.*;
+import com.datatransfer.consumer.MQConsumerConfiguration;
 import com.datatransfer.form.PackageBean;
 import com.datatransfer.form.Receivers;
 import org.junit.Test;
@@ -16,11 +13,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = ProductPackageTest.class)
 public class ProductPackageTest {
 
+
+  private MyRequestUtils MyRequestUtils = new MyRequestUtils();
   /**
    * 列表
    */
   @Test
   public void productServer(){
+
     // 1,生成器
     DataGeneratorContext generator = new DataGeneratorContext();
     generator.getInstance("GE00001");

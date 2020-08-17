@@ -1,6 +1,6 @@
 package com.datatransfer.entity;
 
-import com.cngc.boot.web.dictionary.translate.DictTranslator;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -33,7 +33,6 @@ public class TfProductEntity implements Serializable {
 	/**
 	 * 生成器类型(01:普通;02:流式)
 	 */
-	@DictTranslator(value = "生成器类型")
 	private String generatorType;
 	/**
 	 * 产品名称

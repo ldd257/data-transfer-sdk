@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  * @date 2020-08-11 13:37:16
  */
 @Data
-@Component
 public class DataSeq {
 
     /**

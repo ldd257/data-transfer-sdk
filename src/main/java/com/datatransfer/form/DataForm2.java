@@ -8,7 +8,7 @@
 
 package com.datatransfer.form;
 
-import com.cngc.boot.web.dictionary.translate.DictTranslator;
+
 import lombok.Data;
 
 /**

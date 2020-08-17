@@ -8,7 +8,7 @@
 
 package com.datatransfer.form;
 
-import com.cngc.boot.web.dictionary.translate.DictTranslator;
+
 import lombok.Data;
 
 /**
@@ -19,7 +19,6 @@ import lombok.Data;
 @Data
 public class DataForm {
 
-    @DictTranslator(value = "数据类型")
     private String data_type_code;
 
     private String value;

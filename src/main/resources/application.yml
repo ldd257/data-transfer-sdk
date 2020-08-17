@@ -1,9 +1,7 @@
-###producer
-#该应用是否启用生产者
 plarform:
   server:
     url: 39.105.97.133
-    port: 8070
+    port: 8098
 
 rocketmq:
   ##该应用是否启用消费者

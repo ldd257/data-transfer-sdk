@@ -8,7 +8,7 @@
 
 package com.datatransfer.form;
 
-import com.cngc.boot.web.dictionary.translate.DictTranslator;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -23,7 +23,7 @@ import java.util.List;
 @Data
 public class GeneratorForm {
 
-    @DictTranslator(value = "生成器类型")
+
     private String generatorTypeCode;
 
     private String orderTypeCode;
@@ -35,7 +35,6 @@ public class GeneratorForm {
     @JsonIgnore
     private String dataJson;
 
-    @DictTranslator(value = "状态编码")
     private String statusCode;
 
     @JsonIgnore

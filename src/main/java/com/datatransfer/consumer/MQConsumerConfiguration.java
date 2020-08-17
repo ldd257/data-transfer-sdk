@@ -3,7 +3,7 @@ package com.datatransfer.consumer;
 import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
-import com.datatransfer.config.TransferConfig;
+
 import com.datatransfer.constants.RocketMQErrorEnum;
 import com.datatransfer.consumer.processor.MQConsumeMsgListenerProcessor;
 import com.datatransfer.exception.RocketMQException;

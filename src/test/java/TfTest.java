@@ -16,8 +16,8 @@ import java.util.HashMap;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductPackageTest.class)
 public class TfTest {
-  @Resource
-  private MyRequestUtils myRequestUtils;
+
+  private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
   @Test
   public void httpGetTest(){
