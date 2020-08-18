@@ -1,4 +1,4 @@
-package com.datatransfer.common;
+package com.cngc.transfer.sdk.common;
 
 
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.cngc.transfer.sdk.common;
 
-import com.datatransfer.form.GeneratorForm2;
+import com.cngc.transfer.sdk.form.GeneratorForm2;
 import lombok.Data;
 
 

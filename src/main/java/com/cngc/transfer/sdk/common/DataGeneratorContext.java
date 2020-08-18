@@ -4,7 +4,7 @@ package com.cngc.transfer.sdk.common;
 
 
 import cn.hutool.json.JSONUtil;
-import com.datatransfer.form.GeneratorForm2;
+import com.cngc.transfer.sdk.form.GeneratorForm2;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

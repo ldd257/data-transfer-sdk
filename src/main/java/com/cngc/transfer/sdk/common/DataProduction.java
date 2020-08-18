@@ -1,9 +1,9 @@
 package com.cngc.transfer.sdk.common;
 
 import cn.hutool.json.JSONUtil;
-import com.datatransfer.entity.TfProductEntity;
-import com.datatransfer.form.GeneratorForm2;
-import com.datatransfer.form.PackageForm;
+import com.cngc.transfer.sdk.entity.TfProductEntity;
+import com.cngc.transfer.sdk.form.GeneratorForm2;
+import com.cngc.transfer.sdk.form.PackageForm;
 
 import java.util.HashMap;
 import java.util.Map;

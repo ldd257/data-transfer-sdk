@@ -1,14 +1,14 @@
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 
-import com.datatransfer.aspect.UserDemo;
-import com.datatransfer.common.*;
-import com.datatransfer.consumer.MQConsumerConfiguration;
-import com.datatransfer.form.DataForm;
-import com.datatransfer.form.GeneratorForm2;
-import com.datatransfer.form.PackageBean;
-import com.datatransfer.form.PackageForm;
-import com.datatransfer.form.Receivers;
+import com.cngc.transfer.sdk.aspect.UserDemo;
+import com.cngc.transfer.sdk.common.*;
+import com.cngc.transfer.sdk.consumer.MQConsumerConfiguration;
+import com.cngc.transfer.sdk.form.DataForm;
+import com.cngc.transfer.sdk.form.GeneratorForm2;
+import com.cngc.transfer.sdk.form.PackageBean;
+import com.cngc.transfer.sdk.form.PackageForm;
+import com.cngc.transfer.sdk.form.Receivers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
