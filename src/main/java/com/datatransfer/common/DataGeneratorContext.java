@@ -61,6 +61,9 @@ public class DataGeneratorContext {
     public DataGeneratorContext(){}
     public DataGeneratorContext(String code){
         this.code = code;
+    }public DataGeneratorContext(String serverUrl, String serverPort){
+        myRequestUtils.setTRANFER_PLATFORM_URL(serverUrl);
+        myRequestUtils.setTRANFER_PLATFORM_PORT(serverPort);
     }
 
     private static   DataGeneratorContext instance = null;
@@ -162,7 +165,7 @@ public class DataGeneratorContext {
         String productM = myRequestUtils.myRequestPost("/transfer/generators/" + generatorForm.getGenerator_code() + "/builded", hashMap);
         Map productMap = JSONUtil.toBean(productM, Map.class);
         product.setId(Long.parseLong(((Integer)productMap.get("id")).toString()));
-        return new DataProduction(generatorForm,product);
+        return new DataProduction(generatorForm,product,myRequestUtils);
     }
     /**
      * 获得实例

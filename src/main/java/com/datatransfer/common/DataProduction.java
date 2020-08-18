@@ -25,9 +25,11 @@ public class DataProduction {
     private TfProductEntity tfProductEntity;
     private GeneratorForm2 generatorForm;
     private  DataProduction(){}
-    public DataProduction(GeneratorForm2 generatorForm, TfProductEntity tfProductEntity){
+    public DataProduction(GeneratorForm2 generatorForm, TfProductEntity tfProductEntity, MyRequestUtils myRequestUtils){
         this.tfProductEntity = tfProductEntity;
         this.generatorForm = generatorForm;
+        this.myRequestUtils.setTRANFER_PLATFORM_URL(myRequestUtils.getTRANFER_PLATFORM_URL());
+        this.myRequestUtils.setTRANFER_PLATFORM_PORT(myRequestUtils.getTRANFER_PLATFORM_PORT());
     }
     /**
      *
