@@ -98,6 +98,10 @@ public class DataGenerator {
     public void append(Object obj){
         this.appendJson(JSONUtil.toJsonStr(obj));
     }
+
+    public DataSeq getSequence(){
+        return dataSeq;
+    }
     /**
      * 数据生成
      */
