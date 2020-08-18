@@ -38,7 +38,7 @@ public class DataGenerator {
      * 数据序列.
      */
     @Autowired
-    private DataSeq dataSeq;
+    private DataSequence dataSequence;
     private GeneratorForm2 generatorForm2;
 
     private String code;
@@ -99,8 +99,8 @@ public class DataGenerator {
         this.appendJson(JSONUtil.toJsonStr(obj));
     }
 
-    public DataSeq getSequence(){
-        return dataSeq;
+    public DataSequence getSequence(){
+        return dataSequence;
     }
     /**
      * 数据生成
@@ -124,7 +124,7 @@ public class DataGenerator {
         TfSequenceEntity tfSequenceEntity = new TfSequenceEntity();
 //        TfSequenceEntity tfSeq = JSONUtil.toBean(result2, TfSequenceEntity.class);
         Integer currentNumed = map2.get("current_num") == null || map2.get("current_num").equals("") ? 0 : Integer.parseInt((String) map2.get("current_num"));
-        if (dataSeq.getFlag() == 1){
+        if (dataSequence.getFlag() == 1){
             // flag = 1
             // 序列号+1
             // 修改 追加+1后的序列号

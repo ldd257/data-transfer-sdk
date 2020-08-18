@@ -27,12 +27,12 @@ public class ProductPackageTest {
 //    DataForm datas = this.datas3();
     dataGenerator.append(datas);
 
-    DataSeq dataSeq = dataGenerator.getDataSeq();
+    DataSequence dataSequence = dataGenerator.getDataSequence();
 
 
-    dataSeq.skip();
+    dataSequence.skip();
     // 回填参数为空,则默认回填第一个间隔的序列号.
-    dataSeq.backfill(5);
+    dataSequence.backfill(5);
 
 
 

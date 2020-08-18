@@ -6,13 +6,16 @@ import com.cngc.transfer.sdk.common.DataGeneratorContext;
 import com.cngc.transfer.sdk.common.DataGeneratorContextHolder;
 import com.cngc.transfer.sdk.common.DataPackage;
 import com.cngc.transfer.sdk.common.DataProduction;
-import com.cngc.transfer.sdk.common.DataSeq;
+import com.cngc.transfer.sdk.common.DataSequence;
 import com.cngc.transfer.sdk.form.DataForm;
 import com.cngc.transfer.sdk.form.PackageBean;
 import com.cngc.transfer.sdk.form.PackageForm;
 import com.cngc.transfer.sdk.form.Receivers;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class SdkController {
@@ -29,12 +32,12 @@ public class SdkController {
 //    DataForm datas = this.datas3();
     dataGenerator.append(datas);
 
-    DataSeq dataSeq = dataGenerator.getDataSeq();
+    DataSequence dataSequence = dataGenerator.getDataSequence();
 
 
-    dataSeq.skip();
+    dataSequence.skip();
     // 回填参数为空,则默认回填第一个间隔的序列号.
-    dataSeq.backfill(5);
+    dataSequence.backfill(5);
 
 
 
@@ -43,9 +46,10 @@ public class SdkController {
     DataProduction dataProduction = dataGenerator.build();
 
     // 7，获得打包后的包
-
-    PackageForm datas2 = this.datasForm();
-    DataPackage packaged = dataProduction.packaging(datas2);
+    List<PackageForm> forms = new ArrayList<>();
+    forms.add(this.datasForm());
+    forms.add(this.datasForm2());
+    DataPackage packaged = dataProduction.packaging(forms);
     System.out.println("result=="+packaged.getZipUrl());
     // 获取url
   }
@@ -93,6 +97,23 @@ public class SdkController {
     PackageForm tfPackage121 = new PackageForm();
 
     tfPackage121.setPackageName("autoPackageName");
+    tfPackage121.setIsBroadcast("false");
+
+    Receivers receivers1212 = new Receivers();
+    receivers1212.setApplicationCode("DemoTopic");
+    receivers1212.setPlatformCode("platCode");
+    receivers1212.setProcessCode("addUser");
+
+    tfPackage121.setReceivers(receivers1212);
+    tfPackage121.setBroadcastReceiver(null);
+
+    return tfPackage121;
+  }
+  private PackageForm datasForm2() {
+    // 模拟数据
+    PackageForm tfPackage121 = new PackageForm();
+
+    tfPackage121.setPackageName("autoPackageName222");
     tfPackage121.setIsBroadcast("false");
 
     Receivers receivers1212 = new Receivers();

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -39,49 +40,52 @@ public class DataProduction {
     /**
      *
      */
-    public DataPackage packaging(PackageForm packageBean){
+    public DataPackage packaging(List<PackageForm> packageBeans){
 
-        /*// 获取地址
+        for (PackageForm packageBean : packageBeans){
 
-        // 下载文件
+            /*// 获取地址
 
-        // 打包
+            // 下载文件
 
-        // 上传
+            // 打包
 
-        // 返回url*/
+            // 上传
+
+            // 返回url*/
 
 
-        packageBean.setProductId(tfProductEntity.getId().toString());
-        Map<String, Object> hashMap = new HashMap<>();
-        Map<String, Object> hashMap2 = new HashMap<>();
-        Map<String, Object> hashMap3 = new HashMap<>();
-        if (packageBean.getIsBroadcast().equals("true")){
-            hashMap2.put("application_code",packageBean.getBroadcastReceiver().getApplicationCode());
-            hashMap2.put("process_code",packageBean.getBroadcastReceiver().getProcessCode());
-        }else {
-            hashMap3.put("platform_code",packageBean.getReceivers().getPlatformCode());
-            hashMap3.put("application_code",packageBean.getReceivers().getApplicationCode());
-            hashMap3.put("process_code",packageBean.getReceivers().getProcessCode());
+            packageBean.setProductId(tfProductEntity.getId().toString());
+            Map<String, Object> hashMap = new HashMap<>();
+            Map<String, Object> hashMap2 = new HashMap<>();
+            Map<String, Object> hashMap3 = new HashMap<>();
+            if (packageBean.getIsBroadcast().equals("true")){
+                hashMap2.put("application_code",packageBean.getBroadcastReceiver().getApplicationCode());
+                hashMap2.put("process_code",packageBean.getBroadcastReceiver().getProcessCode());
+            }else {
+                hashMap3.put("platform_code",packageBean.getReceivers().getPlatformCode());
+                hashMap3.put("application_code",packageBean.getReceivers().getApplicationCode());
+                hashMap3.put("process_code",packageBean.getReceivers().getProcessCode());
+            }
+            hashMap.put("is_broadcast",packageBean.getIsBroadcast());
+            hashMap.put("receivers",hashMap3);
+            hashMap.put("broadcast_receiver",hashMap2);
+            hashMap.put("package_name",packageBean.getPackageName());
+            hashMap.put("product_id",tfProductEntity.getId().toString());
+            String result = myRequestUtils.myRequestPost("/transfer/products/"+ generatorForm.getGenerator_code() +"/packaged", hashMap);
+            Map packageMap = JSONUtil.toBean(result, Map.class);
+            hashMap.put("id", (Integer)packageMap.get("id"));
+            String result2 = myRequestUtils.myRequestPost("/transfer/packages/"+ generatorForm.getGenerator_code() +"/packing", hashMap);
+
+
+            // bean 上传 获取url
+            // 返回json
+
+            // 保存数据生成
+            dataPackage.setGeneratorForm(generatorForm);
+            dataPackage.setProductId(tfProductEntity.getId());
+            dataPackage.setZipUrl(result2);
         }
-        hashMap.put("is_broadcast",packageBean.getIsBroadcast());
-        hashMap.put("receivers",hashMap3);
-        hashMap.put("broadcast_receiver",hashMap2);
-        hashMap.put("package_name",packageBean.getPackageName());
-        hashMap.put("product_id",tfProductEntity.getId().toString());
-        String result = myRequestUtils.myRequestPost("/transfer/products/"+ generatorForm.getGenerator_code() +"/packaged", hashMap);
-        Map packageMap = JSONUtil.toBean(result, Map.class);
-        hashMap.put("id", (Integer)packageMap.get("id"));
-        String result2 = myRequestUtils.myRequestPost("/transfer/packages/"+ generatorForm.getGenerator_code() +"/packing", hashMap);
-
-
-        // bean 上传 获取url
-        // 返回json
-
-        // 保存数据生成
-        dataPackage.setGeneratorForm(generatorForm);
-        dataPackage.setProductId(tfProductEntity.getId());
-        dataPackage.setZipUrl(result2);
         return dataPackage;
     }
 }

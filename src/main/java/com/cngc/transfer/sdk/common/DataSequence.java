@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-public class DataSeq {
+public class DataSequence {
 
     /**
      * 自增序列seq
@@ -26,7 +26,7 @@ public class DataSeq {
     private int flagInt;
 
 
-    public DataSeq (){
+    public DataSequence(){
         super();
 //        this.seq = this.selectSeq();
     }

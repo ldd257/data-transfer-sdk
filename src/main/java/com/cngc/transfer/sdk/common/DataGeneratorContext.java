@@ -30,7 +30,7 @@ public class DataGeneratorContext {
      * 数据序列.
      */
     @Autowired
-    private DataSeq dataSeq;
+    private DataSequence dataSequence;
 
     private GeneratorForm2 generatorForm;
 
