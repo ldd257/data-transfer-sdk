@@ -14,17 +14,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ProductPackageTest {
 
 
-  private MyRequestUtils MyRequestUtils = new MyRequestUtils();
+  private MyRequestUtils myRequestUtils = new MyRequestUtils();
   /**
    * 列表
    */
   @Test
   public void productServer(){
 
+      String serverUrl = "http://39.105.97.133";
+      String serverPort = "8098";
+//  private  String serverUrl = "http://localhost";
+//  private  String serverPort = "8080";
     // 1,生成器
-    DataGeneratorContext generator = new DataGeneratorContext();
+    DataGeneratorContext generator = new DataGeneratorContext(serverUrl, serverPort);
     generator.getInstance("GE00001");
-
 
     // 模拟数据
     PackageBean datas = this.datas();
@@ -66,13 +69,22 @@ public class ProductPackageTest {
     tfPackage121.setIsBroadcast("false");
 
     Receivers receivers1212 = new Receivers();
-    receivers1212.setApplicationCode("appCode");
+    receivers1212.setApplicationCode("DemoTopic");
     receivers1212.setPlatformCode("platCode");
-    receivers1212.setProcessCode("02");
+    receivers1212.setProcessCode("addUser");
 
     tfPackage121.setReceivers(receivers1212);
     tfPackage121.setBroadcastReceiver(null);
     return tfPackage121;
+  }
+
+
+  @Test
+  public void xxxTest(){
+    PackageBean datas = this.datas();
+    String json = JSONUtil.toJsonStr(datas);
+    String fileUrl = myRequestUtils.myRequestPost("/transfer/oss/upload", json);
+    System.out.println(fileUrl);
   }
 
 
