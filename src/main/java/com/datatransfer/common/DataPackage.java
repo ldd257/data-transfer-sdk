@@ -1,9 +1,7 @@
 package com.datatransfer.common;
 
-import com.datatransfer.form.GeneratorForm;
 import com.datatransfer.form.GeneratorForm2;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 
 /**

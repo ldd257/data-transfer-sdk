@@ -2,7 +2,6 @@ package com.datatransfer.common;
 
 import cn.hutool.http.HttpUtil;
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 
 /**
@@ -22,6 +21,7 @@ public class DataSeq {
     private String seq;
 
     private int flag;
+    private int flagInt;
 
 
     public DataSeq (){
@@ -40,8 +40,15 @@ public class DataSeq {
     /**
      * 回填
      */
-    public void backFill(){
+    public void backfill(){
         flag = 2;
+    }
+    /**
+     * 回填
+     */
+    public void backfill(int i){
+        flag = 3;
+        flagInt = i;
     }
 
     /**

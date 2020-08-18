@@ -1,7 +1,12 @@
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
+import com.datatransfer.aspect.UserDemo;
 import com.datatransfer.common.*;
 import com.datatransfer.consumer.MQConsumerConfiguration;
+import com.datatransfer.form.DataForm;
+import com.datatransfer.form.GeneratorForm2;
 import com.datatransfer.form.PackageBean;
+import com.datatransfer.form.PackageForm;
 import com.datatransfer.form.Receivers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,54 +19,54 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class ProductPackageTest {
 
 
-  private MyRequestUtils myRequestUtils = new MyRequestUtils();
-  /**
-   * 列表
-   */
   @Test
-  public void productServer(){
-
-      String serverUrl = "http://39.105.97.133";
-      String serverPort = "8098";
-//  private  String serverUrl = "http://localhost";
-//  private  String serverPort = "8080";
-    // 1,生成器
-    DataGeneratorContext generator = new DataGeneratorContext(serverUrl, serverPort);
-    generator.getInstance("GE00001");
+  public void testSdk(){
+    DataGeneratorContext context = DataGeneratorContextHolder.getContext();
+    DataGenerator dataGenerator = context.getGenerator("GE00001");
 
     // 模拟数据
-    PackageBean datas = this.datas();
-    String json = JSONUtil.toJsonStr(datas);
-    // 2，追加数据
-    generator.appendJson(json);
+    UserDemo datas = this.datas2();
+//    DataForm datas = this.datas3();
+    dataGenerator.append(datas);
 
-    // 3，获得序列  查询序列
-    DataSeq dataSeq = generator.getDataSeq();
-//    String seqNum = dataSeq.getSeq();
+    DataSeq dataSeq = dataGenerator.getDataSeq();
 
-    // 4，序列跳过
     dataSeq.skip();
-    // 获取间隔序列号列表 [17]
-    // 5，序列回填
-    dataSeq.backFill();
-
+    // 回填参数为空,则默认回填第一个间隔的序列号.
+    dataSeq.backfill(5);
 
 
     // 6，打包，获得产品包
     // 添加俩个参数  序列号  数据内容
-    DataProduction dataProduction = generator.build();
+    DataProduction dataProduction = dataGenerator.build();
 
     // 7，获得打包后的包
-    DataPackage packaged = dataProduction.packaging(datas);
+    PackageForm datas2 = this.datasForm();
+    DataPackage packaged = dataProduction.packaging(datas2);
     System.out.println("result=="+packaged.getZipUrl());
     // 获取url
   }
 
 
 
+  private UserDemo datas2(){
+    // 模拟数据
+    UserDemo userDemo = new UserDemo();
+    userDemo.setName("aaa");
+    return userDemo;
+  }
 
 
-  private PackageBean datas(){
+  private DataForm datas3(){
+    // 模拟数据
+    DataForm dataForm = new DataForm();
+    dataForm.setData_type_code("ccc");
+    dataForm.setValue("vvvvvv");
+    return dataForm;
+  }
+
+
+  private PackageBean datas() {
     // 模拟数据
     PackageBean tfPackage121 = new PackageBean();
 
@@ -75,18 +80,26 @@ public class ProductPackageTest {
 
     tfPackage121.setReceivers(receivers1212);
     tfPackage121.setBroadcastReceiver(null);
+
     return tfPackage121;
   }
+  private PackageForm datasForm() {
+    // 模拟数据
+    PackageForm tfPackage121 = new PackageForm();
 
+    tfPackage121.setPackageName("autoPackageName");
+    tfPackage121.setIsBroadcast("false");
 
-  @Test
-  public void xxxTest(){
-    PackageBean datas = this.datas();
-    String json = JSONUtil.toJsonStr(datas);
-    String fileUrl = myRequestUtils.myRequestPost("/transfer/oss/upload", json);
-    System.out.println(fileUrl);
+    Receivers receivers1212 = new Receivers();
+    receivers1212.setApplicationCode("DemoTopic");
+    receivers1212.setPlatformCode("platCode");
+    receivers1212.setProcessCode("addUser");
+
+    tfPackage121.setReceivers(receivers1212);
+    tfPackage121.setBroadcastReceiver(null);
+
+    return tfPackage121;
   }
-
 
 
 
