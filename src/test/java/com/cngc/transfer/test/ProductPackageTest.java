@@ -12,6 +12,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductPackageTest.class)
 public class ProductPackageTest {
@@ -42,8 +45,10 @@ public class ProductPackageTest {
 
     // 7，获得打包后的包
 
-    PackageForm datas2 = this.datasForm();
-    DataPackage packaged = dataProduction.packaging(datas2);
+    List<PackageForm> forms = new ArrayList<>();
+    forms.add(this.datasForm());
+    forms.add(this.datasForm2());
+    DataPackage packaged = dataProduction.packaging(forms);
     System.out.println("result=="+packaged.getZipUrl());
     // 获取url
   }
@@ -101,7 +106,23 @@ public class ProductPackageTest {
 
     return tfPackage121;
   }
+  private PackageForm datasForm2() {
+    // 模拟数据
+    PackageForm tfPackage121 = new PackageForm();
 
+    tfPackage121.setPackageName("autoPackageName222");
+    tfPackage121.setIsBroadcast("false");
+
+    Receivers receivers1212 = new Receivers();
+    receivers1212.setApplicationCode("DemoTopic");
+    receivers1212.setPlatformCode("platCode");
+    receivers1212.setProcessCode("addUser");
+
+    tfPackage121.setReceivers(receivers1212);
+    tfPackage121.setBroadcastReceiver(null);
+
+    return tfPackage121;
+  }
 
 
 }
