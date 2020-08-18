@@ -17,8 +17,7 @@ public class MyRequestUtils {
 /*  public   String TRANFER_PLATFORM_URL  ;
   public  String TRANFER_PLATFORM_PORT  ;*/
 
-  @Autowired
-  private TransferConfig transferConfig;
+  private TransferConfig transferConfig = new TransferConfig();
 
 //  private  String TRANFER_PLATFORM_URL = "http://localhost";
 //  private  String TRANFER_PLATFORM_PORT = "8080";

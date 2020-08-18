@@ -19,8 +19,7 @@ import java.util.Map;
  */
 public class DataProduction {
 
-    @Autowired
-	private MyRequestUtils myRequestUtils;
+	private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
     private TfProductEntity tfProductEntity;
     private GeneratorForm2 generatorForm;

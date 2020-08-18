@@ -6,6 +6,7 @@ package com.clouds.common.rocketmq.common;
 import cn.hutool.json.JSONUtil;
 import com.clouds.common.rocketmq.form.GeneratorForm2;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 

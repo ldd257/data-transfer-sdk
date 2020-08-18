@@ -27,8 +27,7 @@ import java.util.Map;
 @Component
 public class DataGenerator {
 
-    @Autowired
-	private MyRequestUtils myRequestUtils;
+	private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
     /**
      * 数据序列.
