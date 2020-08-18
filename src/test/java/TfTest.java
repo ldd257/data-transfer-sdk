@@ -2,15 +2,13 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import com.datatransfer.common.MyRequestUtils;
-import com.datatransfer.entity.TfProductEntity;
+import com.cngc.transfer.sdk.common.MyRequestUtils;
+import com.cngc.transfer.sdk.entity.TfProductEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 
 @RunWith(SpringRunner.class)

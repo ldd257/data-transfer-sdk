@@ -1,11 +1,9 @@
 import cn.hutool.json.JSONUtil;
-import com.datatransfer.common.*;
-import com.datatransfer.consumer.MQConsumerConfiguration;
-import com.datatransfer.form.PackageBean;
-import com.datatransfer.form.Receivers;
+import com.cngc.transfer.sdk.common.*;
+import com.cngc.transfer.sdk.form.PackageBean;
+import com.cngc.transfer.sdk.form.Receivers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -40,11 +38,10 @@ public class ProductPackageTest {
 //    String seqNum = dataSeq.getSeq();
 
     // 4，序列跳过
-    dataSeq.skip();
+//    dataSeq.skip();
     // 获取间隔序列号列表 [17]
     // 5，序列回填
-    dataSeq.backFill();
-
+//    dataSeq.backFill();
 
 
     // 6，打包，获得产品包
@@ -53,6 +50,11 @@ public class ProductPackageTest {
 
     // 7，获得打包后的包
     DataPackage packaged = dataProduction.packaging(datas);
+
+
+
+
+
     System.out.println("result=="+packaged.getZipUrl());
     // 获取url
   }
