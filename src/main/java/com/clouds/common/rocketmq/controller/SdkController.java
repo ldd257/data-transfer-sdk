@@ -24,7 +24,6 @@ public class SdkController {
 
   @GetMapping("/testtest")
   public void list(){
-    Map maps = DataApplicationContextAware.getApplicationContext();
     DataGeneratorContext context = DataGeneratorContextHolder.getContext();
     DataGenerator dataGenerator = context.getGenerator("GE00001");
 
