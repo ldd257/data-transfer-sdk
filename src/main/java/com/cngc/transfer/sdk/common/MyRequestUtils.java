@@ -4,9 +4,6 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyRequestUtils {
 
-  public   String TRANFER_PLATFORM_URL  ;
-  public  String TRANFER_PLATFORM_PORT  ;
-//  private  String TRANFER_PLATFORM_URL = "http://localhost";
-//  private  String TRANFER_PLATFORM_PORT = "8080";
+/*  public   String TRANFER_PLATFORM_URL  ;
+  public  String TRANFER_PLATFORM_PORT  ;*/
+  private  String TRANFER_PLATFORM_URL = "http://localhost";
+  private  String TRANFER_PLATFORM_PORT = "8080";
   /**
    * get封装
    * @param url url请求地址

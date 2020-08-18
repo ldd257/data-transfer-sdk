@@ -1,9 +1,9 @@
 package com.cngc.transfer.sdk.common;
 
 import cn.hutool.json.JSONUtil;
-import com.cngc.transfer.sdk.entity.TfProductEntity;
-import com.cngc.transfer.sdk.form.GeneratorForm2;
-import com.cngc.transfer.sdk.form.PackageBean;
+import com.datatransfer.entity.TfProductEntity;
+import com.datatransfer.form.GeneratorForm2;
+import com.datatransfer.form.PackageForm;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,16 +23,15 @@ public class DataProduction {
     private TfProductEntity tfProductEntity;
     private GeneratorForm2 generatorForm;
     private  DataProduction(){}
-    public DataProduction(GeneratorForm2 generatorForm, TfProductEntity tfProductEntity, MyRequestUtils myRequestUtils){
+    public DataProduction(GeneratorForm2 generatorForm, TfProductEntity tfProductEntity){
         this.tfProductEntity = tfProductEntity;
         this.generatorForm = generatorForm;
-        this.myRequestUtils.setTRANFER_PLATFORM_URL(myRequestUtils.getTRANFER_PLATFORM_URL());
-        this.myRequestUtils.setTRANFER_PLATFORM_PORT(myRequestUtils.getTRANFER_PLATFORM_PORT());
+
     }
     /**
      *
      */
-    public DataPackage packaging(PackageBean packageBean){
+    public DataPackage packaging(PackageForm packageBean){
 
         /*// 获取地址
 
