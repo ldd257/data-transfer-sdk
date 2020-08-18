@@ -1,11 +1,9 @@
 package com.clouds.common.rocketmq.aspect;
 
-
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
+
+
 @DataProcessor("addUser")
 public class TransformServices {
 
