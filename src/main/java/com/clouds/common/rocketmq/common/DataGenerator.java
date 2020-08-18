@@ -27,12 +27,18 @@ import java.util.Map;
 @Component
 public class DataGenerator {
 
-	private MyRequestUtils myRequestUtils = new MyRequestUtils();
+    @Autowired
+    private DataGeneratorContext dataGeneratorContext;
+    @Autowired
+    private DataProduction dataProduction;
+    @Autowired
+    private MyRequestUtils myRequestUtils;
 
     /**
      * 数据序列.
      */
-    private DataSeq dataSeq = new DataSeq();
+    @Autowired
+    private DataSeq dataSeq;
     private GeneratorForm2 generatorForm2;
 
     private String code;
@@ -46,16 +52,13 @@ public class DataGenerator {
         this.code = code;
     }
 
-    public DataGenerator(GeneratorForm2 generatorForm2){
-        this.generatorForm = generatorForm2;
-    }
 
     private static DataGenerator instance = null;
     /**
      * 数据追加
      */
     public void appendJson(String json){
-
+        generatorForm = dataGeneratorContext.getGeneratorForm();
         // 数据 listObj
         String fileUrl = myRequestUtils.myRequestPost("/transfer/oss/upload", json);
         DataForm dataForm = new DataForm();
@@ -153,7 +156,9 @@ public class DataGenerator {
         String productM = myRequestUtils.myRequestPost("/transfer/generators/" + generatorForm.getGenerator_code() + "/builded", hashMap);
         Map productMap = JSONUtil.toBean(productM, Map.class);
         product.setId(Long.parseLong(((Integer)productMap.get("id")).toString()));
-        return new DataProduction(generatorForm,product);
+        dataProduction.setGeneratorForm(generatorForm);
+        dataProduction.setTfProductEntity(product);
+        return dataProduction;
     }
 
 

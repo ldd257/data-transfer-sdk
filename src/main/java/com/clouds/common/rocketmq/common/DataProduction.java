@@ -4,7 +4,9 @@ import cn.hutool.json.JSONUtil;
 import com.clouds.common.rocketmq.entity.TfProductEntity;
 import com.clouds.common.rocketmq.form.GeneratorForm2;
 import com.clouds.common.rocketmq.form.PackageForm;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,9 +19,14 @@ import java.util.Map;
  * @email ldd@gmail.com
  * @date 2020-08-11 13:37:16
  */
+@Data
+@Component
 public class DataProduction {
 
-	private MyRequestUtils myRequestUtils = new MyRequestUtils();
+    @Autowired
+    private MyRequestUtils myRequestUtils;
+    @Autowired
+    private DataPackage dataPackage;
 
     private TfProductEntity tfProductEntity;
     private GeneratorForm2 generatorForm;
@@ -72,6 +79,9 @@ public class DataProduction {
         // 返回json
 
         // 保存数据生成
-        return new DataPackage(generatorForm, tfProductEntity.getId(), result2);
+        dataPackage.setGeneratorForm(generatorForm);
+        dataPackage.setProductId(tfProductEntity.getId());
+        dataPackage.setZipUrl(result2);
+        return dataPackage;
     }
 }

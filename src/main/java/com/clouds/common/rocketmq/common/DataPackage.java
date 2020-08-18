@@ -2,6 +2,7 @@ package com.clouds.common.rocketmq.common;
 
 import com.clouds.common.rocketmq.form.GeneratorForm2;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * @date 2020-08-11 13:37:16
  */
 @Data
+@Component
 public class DataPackage {
 
   private GeneratorForm2 generatorForm;

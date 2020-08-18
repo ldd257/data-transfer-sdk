@@ -2,6 +2,7 @@ package com.clouds.common.rocketmq.common;
 
 import cn.hutool.http.HttpUtil;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * @date 2020-08-11 13:37:16
  */
 @Data
+@Component
 public class DataSeq {
 
     /**

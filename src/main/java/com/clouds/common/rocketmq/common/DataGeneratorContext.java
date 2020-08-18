@@ -21,14 +21,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataGeneratorContext {
 
-    MyRequestUtils myRequestUtils = new MyRequestUtils();
+    @Autowired
+    private DataGenerator dataGenerator;
+    @Autowired
+    private MyRequestUtils myRequestUtils;
 
     /**
      * 数据序列.
      */
-    private DataSeq dataSeq = new DataSeq();
+    @Autowired
+    private DataSeq dataSeq;
 
-    private static GeneratorForm2 generatorForm;
+    private  GeneratorForm2 generatorForm;
 
 
     /**
@@ -38,8 +42,8 @@ public class DataGeneratorContext {
         // 1,查询生成器
         String result = myRequestUtils.myRequestGet("/transfer/generators/" + code);
         generatorForm = JSONUtil.toBean(result, GeneratorForm2.class);
-
-        return new DataGenerator(generatorForm);
+        dataGenerator.setGeneratorForm(generatorForm);
+        return dataGenerator;
     }
 
 
