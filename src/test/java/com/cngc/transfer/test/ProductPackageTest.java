@@ -5,7 +5,7 @@ import com.cngc.transfer.sdk.aspect.UserDemo;
 import com.cngc.transfer.sdk.form.DataForm;
 import com.cngc.transfer.sdk.form.PackageBean;
 import com.cngc.transfer.sdk.form.PackageForm;
-import com.cngc.transfer.sdk.form.Receivers;
+import com.cngc.transfer.sdk.form.Receiver;
 import com.cngc.transfer.sdk.common.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,10 +45,8 @@ public class ProductPackageTest {
 
     // 7，获得打包后的包
 
-    List<PackageForm> forms = new ArrayList<>();
-    forms.add(this.datasForm());
-    forms.add(this.datasForm2());
-    DataPackage packaged = dataProduction.packaging(forms);
+    PackageForm packageForm = this.datasForm();
+    DataPackage packaged = dataProduction.packaging(packageForm);
     System.out.println("result=="+packaged.getZipUrl());
     // 获取url
   }
@@ -79,12 +77,12 @@ public class ProductPackageTest {
     tfPackage121.setPackageName("autoPackageName");
     tfPackage121.setIsBroadcast("false");
 
-    Receivers receivers1212 = new Receivers();
-    receivers1212.setApplicationCode("DemoTopic");
-    receivers1212.setPlatformCode("platCode");
-    receivers1212.setProcessCode("addUser");
+    Receiver receiver1212 = new Receiver();
+    receiver1212.setApplicationCode("DemoTopic");
+    receiver1212.setPlatformCode("platCode");
+    receiver1212.setProcessCode("addUser");
 
-    tfPackage121.setReceivers(receivers1212);
+    tfPackage121.setReceiver(receiver1212);
     tfPackage121.setBroadcastReceiver(null);
 
     return tfPackage121;
@@ -96,12 +94,12 @@ public class ProductPackageTest {
     tfPackage121.setPackageName("autoPackageName");
     tfPackage121.setIsBroadcast("false");
 
-    Receivers receivers1212 = new Receivers();
-    receivers1212.setApplicationCode("DemoTopic");
-    receivers1212.setPlatformCode("platCode");
-    receivers1212.setProcessCode("addUser");
+    Receiver receiver1212 = new Receiver();
+    receiver1212.setApplicationCode("DemoTopic");
+    receiver1212.setPlatformCode("platCode");
+    receiver1212.setProcessCode("addUser");
 
-    tfPackage121.setReceivers(receivers1212);
+    tfPackage121.setReceivers(receiver1212);
     tfPackage121.setBroadcastReceiver(null);
 
     return tfPackage121;
@@ -113,12 +111,12 @@ public class ProductPackageTest {
     tfPackage121.setPackageName("autoPackageName222");
     tfPackage121.setIsBroadcast("false");
 
-    Receivers receivers1212 = new Receivers();
-    receivers1212.setApplicationCode("DemoTopic");
-    receivers1212.setPlatformCode("platCode");
-    receivers1212.setProcessCode("addUser");
+    Receiver receiver1212 = new Receiver();
+    receiver1212.setApplicationCode("DemoTopic");
+    receiver1212.setPlatformCode("platCode");
+    receiver1212.setProcessCode("addUser");
 
-    tfPackage121.setReceivers(receivers1212);
+    tfPackage121.setReceivers(receiver1212);
     tfPackage121.setBroadcastReceiver(null);
 
     return tfPackage121;

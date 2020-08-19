@@ -8,10 +8,10 @@
 
 package com.cngc.transfer.sdk.form;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 数据包裹
@@ -24,7 +24,7 @@ public class PackageForm {
     /**
      * 接收者
      */
-    private Receivers receivers;
+    private List<Receiver> receivers;
 
     /**
      * 广播接收者
@@ -40,18 +40,12 @@ public class PackageForm {
      * 包名
      */
     private String packageName;
-    /**
-     * 文件url
-     */
-    private String fileUrl;
-    /**
-     * 创建时间
-     */
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH-mm-ss.SSSXXX")
-    private Date createTime;
 
-    /**
-     * 产品主键
-     */
-    private String productId;
+
+
+    public void setReceivers(Receiver receivers) {
+        List<Receiver> rece = new ArrayList<>();
+        rece.add(receivers);
+        this.receivers = rece;
+    }
 }

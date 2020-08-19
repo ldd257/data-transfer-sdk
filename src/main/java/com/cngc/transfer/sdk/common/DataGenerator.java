@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -39,25 +38,16 @@ public class DataGenerator {
      */
     @Autowired
     private DataSequence dataSequence;
-    private GeneratorForm2 generatorForm2;
-
-    private String code;
 
     private GeneratorForm2 generatorForm;
 
-    private List<Object> listObj;
-
     public DataGenerator(){}
-    public DataGenerator(String code){
-        this.code = code;
-    }
 
 
-    private static DataGenerator instance = null;
     /**
      * 数据追加
      */
-    public void appendJson(String json){
+    private void appendJson(String json){
         generatorForm = dataGeneratorContext.getGeneratorForm();
         // 数据 listObj
         String fileUrl = myRequestUtils.myRequestPost("/transfer/oss/upload", json);
@@ -70,7 +60,6 @@ public class DataGenerator {
         // 修改datas
         String result = myRequestUtils.myRequestGet("/transfer/generators/" + generatorForm.getGenerator_code());
         GeneratorForm generatorForm = JSONUtil.toBean(result, GeneratorForm.class);
-//        GeneratorForm generatorForm = new GeneratorForm();
 
         generatorForm.getDatas().add(dataForm);
         myRequestUtils.myRequestPut("/transfer/generators/"+ generatorForm.getGeneratorCode(), generatorForm);
@@ -99,9 +88,6 @@ public class DataGenerator {
         this.appendJson(JSONUtil.toJsonStr(obj));
     }
 
-    public DataSequence getSequence(){
-        return dataSequence;
-    }
     /**
      * 数据生成
      */
@@ -117,12 +103,10 @@ public class DataGenerator {
 
         // 当前序列号
         String result = myRequestUtils.myRequestGet("/transfer/generators/" + generatorForm.getGenerator_code());
-//        TfGeneratorEntity tf = JSONUtil.toBean(result, TfGeneratorEntity.class);
         Map map1 = JSONUtil.toBean(result, Map.class);
         String result2 = myRequestUtils.myRequestGet("/transfer/sequences/" + map1.get("order_type_code"));
         Map map2 = JSONUtil.toBean(result2, Map.class);
         TfSequenceEntity tfSequenceEntity = new TfSequenceEntity();
-//        TfSequenceEntity tfSeq = JSONUtil.toBean(result2, TfSequenceEntity.class);
         Integer currentNumed = map2.get("current_num") == null || map2.get("current_num").equals("") ? 0 : Integer.parseInt((String) map2.get("current_num"));
         if (dataSequence.getFlag() == 1){
             // flag = 1
@@ -150,9 +134,6 @@ public class DataGenerator {
         TfProductEntity product = new TfProductEntity();
         product.setGeneratorType(generatorForm.getGenerator_type().getCode());
         product.setGeneratorCode(generatorForm.getGenerator_code());
-        // sequenceNum
-       /* product.setOrderTypeCode((String) map2.get("seq_code"));
-        product.setProductName("autoProductName");*/
 
         Map<String, String> hashMap = new HashMap<>();
         hashMap.put("product_name","autoProductName");

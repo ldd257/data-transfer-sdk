@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -40,9 +39,8 @@ public class DataProduction {
     /**
      *
      */
-    public DataPackage packaging(List<PackageForm> packageBeans){
+    public DataPackage packaging(PackageForm packageBean){
 
-        for (PackageForm packageBean : packageBeans){
 
             /*// 获取地址
 
@@ -55,7 +53,6 @@ public class DataProduction {
             // 返回url*/
 
 
-            packageBean.setProductId(tfProductEntity.getId().toString());
             Map<String, Object> hashMap = new HashMap<>();
             Map<String, Object> hashMap2 = new HashMap<>();
             Map<String, Object> hashMap3 = new HashMap<>();
@@ -63,9 +60,16 @@ public class DataProduction {
                 hashMap2.put("application_code",packageBean.getBroadcastReceiver().getApplicationCode());
                 hashMap2.put("process_code",packageBean.getBroadcastReceiver().getProcessCode());
             }else {
-                hashMap3.put("platform_code",packageBean.getReceivers().getPlatformCode());
-                hashMap3.put("application_code",packageBean.getReceivers().getApplicationCode());
-                hashMap3.put("process_code",packageBean.getReceivers().getProcessCode());
+                if (packageBean.getReceivers().size() > 0){
+                    hashMap3.put("platform_code",packageBean.getReceivers().get(0).getPlatformCode());
+                    hashMap3.put("application_code",packageBean.getReceivers().get(0).getApplicationCode());
+                    hashMap3.put("process_code",packageBean.getReceivers().get(0).getProcessCode());
+                }else{
+                    hashMap3.put("platform_code","");
+                    hashMap3.put("application_code","");
+                    hashMap3.put("process_code","");
+                }
+
             }
             hashMap.put("is_broadcast",packageBean.getIsBroadcast());
             hashMap.put("receivers",hashMap3);
@@ -83,9 +87,10 @@ public class DataProduction {
 
             // 保存数据生成
             dataPackage.setGeneratorForm(generatorForm);
-            dataPackage.setProductId(tfProductEntity.getId());
+            // dataPackage.setProductId(tfProductEntity.getId());
             dataPackage.setZipUrl(result2);
-        }
-        return dataPackage;
+            return dataPackage;
+
     }
+
 }

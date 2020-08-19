@@ -24,7 +24,7 @@ public class PackageBean {
     /**
      * 接收者
      */
-    private Receivers receivers;
+    private Receiver receiver;
 
     /**
      * 广播接收者

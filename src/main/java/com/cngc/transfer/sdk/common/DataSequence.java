@@ -26,10 +26,6 @@ public class DataSequence {
     private int flagInt;
 
 
-    public DataSequence(){
-        super();
-//        this.seq = this.selectSeq();
-    }
 
     /**
      * 跳过

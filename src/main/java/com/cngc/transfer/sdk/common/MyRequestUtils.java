@@ -14,15 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyRequestUtils {
 
-/*  public   String TRANFER_PLATFORM_URL  ;
-  public  String TRANFER_PLATFORM_PORT  ;*/
-
-//  private TransferConfig transferConfig = new TransferConfig();
   @Autowired
   private TransferConfig transferConfig;
 
-//  private  String TRANFER_PLATFORM_URL = "http://localhost";
-//  private  String TRANFER_PLATFORM_PORT = "8080";
   /**
    * get封装
    * @param url url请求地址
