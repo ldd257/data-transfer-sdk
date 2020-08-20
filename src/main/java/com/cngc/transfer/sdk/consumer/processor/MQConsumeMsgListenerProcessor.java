@@ -89,12 +89,12 @@ public class MQConsumeMsgListenerProcessor implements MessageListenerConcurrentl
 					DataRun dataRun = m.getAnnotation(DataRun.class);
 					if(null!=dataRun){
 						try {
-							Object ob = clazz.newInstance();
-							m.invoke(ob, parameter.toList(dataRun.value()));
-						} catch (InstantiationException e) {
+//							Object ob = clazz.newInstance();
+							m.invoke(entry.getValue(), parameter.toList(dataRun.value()));
+						} /*catch (InstantiationException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						} catch (IllegalAccessException e) {
+						}*/ catch (IllegalAccessException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IllegalArgumentException e) {
