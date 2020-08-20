@@ -34,7 +34,7 @@ public class PackageForm {
     /**
      * 是否广播
      */
-    private String isBroadcast;
+    private Boolean isBroadcast;
 
     /**
      * 包名

@@ -29,7 +29,7 @@ public class DataGenerator {
     @Autowired
     private DataGeneratorContext dataGeneratorContext;
     @Autowired
-    private DataProduction dataProduction;
+    private DataProduct dataProduct;
     @Autowired
     private MyRequestUtils myRequestUtils;
 
@@ -91,7 +91,7 @@ public class DataGenerator {
     /**
      * 数据生成
      */
-    public DataProduction build(){
+    public DataProduct build(){
         // 获取datasUrls
 
         // 下载文件
@@ -141,9 +141,13 @@ public class DataGenerator {
         String productM = myRequestUtils.myRequestPost("/transfer/generators/" + generatorForm.getGenerator_code() + "/builded", hashMap);
         Map productMap = JSONUtil.toBean(productM, Map.class);
         product.setId(Long.parseLong(((Integer)productMap.get("id")).toString()));
-        dataProduction.setGeneratorForm(generatorForm);
-        dataProduction.setTfProductEntity(product);
-        return dataProduction;
+        dataProduct.setGeneratorForm(generatorForm);
+        dataProduct.setTfProductEntity(product);
+        return dataProduct;
+    }
+
+    public DataSequence getSequence(){
+        return dataSequence;
     }
 
 

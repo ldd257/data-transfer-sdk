@@ -5,7 +5,7 @@ import com.cngc.transfer.sdk.common.DataGenerator;
 import com.cngc.transfer.sdk.common.DataGeneratorContext;
 import com.cngc.transfer.sdk.common.DataGeneratorContextHolder;
 import com.cngc.transfer.sdk.common.DataPackage;
-import com.cngc.transfer.sdk.common.DataProduction;
+import com.cngc.transfer.sdk.common.DataProduct;
 import com.cngc.transfer.sdk.common.DataSequence;
 import com.cngc.transfer.sdk.form.DataForm;
 import com.cngc.transfer.sdk.form.PackageBean;
@@ -32,7 +32,7 @@ public class SdkController {
 //    DataForm datas = this.datas3();
     dataGenerator.append(datas);
 
-    DataSequence dataSequence = dataGenerator.getDataSequence();
+    DataSequence dataSequence = dataGenerator.getSequence();
 
 
     dataSequence.skip();
@@ -44,12 +44,13 @@ public class SdkController {
 
     // 6，打包，获得产品包
     // 添加俩个参数  序列号  数据内容
-    DataProduction dataProduction = dataGenerator.build();
+    DataProduct dataProduct = dataGenerator.build();
 
     // 7，获得打包后的包
     PackageForm packageForm = this.datasForm();
-    DataPackage packaged = dataProduction.packaging(packageForm);
+    DataPackage packaged = dataProduct.packaging(packageForm);
     System.out.println("result=="+packaged.getZipUrl());
+
     // 获取url
   }
 
@@ -96,7 +97,7 @@ public class SdkController {
     PackageForm tfPackage121 = new PackageForm();
 
     tfPackage121.setPackageName("autoPackageName");
-    tfPackage121.setIsBroadcast("false");
+    tfPackage121.setIsBroadcast(false);
 
     Receiver receiver1212 = new Receiver();
     receiver1212.setApplicationCode("DemoTopic");
@@ -113,7 +114,7 @@ public class SdkController {
     PackageForm tfPackage121 = new PackageForm();
 
     tfPackage121.setPackageName("autoPackageName222");
-    tfPackage121.setIsBroadcast("false");
+    tfPackage121.setIsBroadcast(false);
 
     Receiver receiver1212 = new Receiver();
     receiver1212.setApplicationCode("DemoTopic");

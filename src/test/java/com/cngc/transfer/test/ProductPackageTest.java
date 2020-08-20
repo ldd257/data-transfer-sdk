@@ -2,18 +2,20 @@ package com.cngc.transfer.test;
 
 
 import com.cngc.transfer.sdk.aspect.UserDemo;
+import com.cngc.transfer.sdk.common.DataGenerator;
+import com.cngc.transfer.sdk.common.DataGeneratorContext;
+import com.cngc.transfer.sdk.common.DataGeneratorContextHolder;
+import com.cngc.transfer.sdk.common.DataPackage;
+import com.cngc.transfer.sdk.common.DataProduct;
+import com.cngc.transfer.sdk.common.DataSequence;
 import com.cngc.transfer.sdk.form.DataForm;
 import com.cngc.transfer.sdk.form.PackageBean;
 import com.cngc.transfer.sdk.form.PackageForm;
 import com.cngc.transfer.sdk.form.Receiver;
-import com.cngc.transfer.sdk.common.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductPackageTest.class)
@@ -41,7 +43,7 @@ public class ProductPackageTest {
 
     // 6，打包，获得产品包
     // 添加俩个参数  序列号  数据内容
-    DataProduction dataProduction = dataGenerator.build();
+    DataProduct dataProduction = dataGenerator.build();
 
     // 7，获得打包后的包
 
@@ -49,6 +51,28 @@ public class ProductPackageTest {
     DataPackage packaged = dataProduction.packaging(packageForm);
     System.out.println("result=="+packaged.getZipUrl());
     // 获取url
+  }
+
+
+  public void xxTest(){
+    // 从数据生成器上下文持有者中获取数据生成器上下文
+    DataGeneratorContext context = DataGeneratorContextHolder.getContext();
+// 使用数据生成器上下文获取数据生成器
+    DataGenerator dataGenerator = context.getGenerator("code");
+    UserDemo datas = this.datas2();
+    dataGenerator.append(datas);
+// 数据序列
+    DataSequence dataSeq = dataGenerator.getSequence();
+    dataSeq.skip();
+// 回填参数为空,则默认回填第一个间隔的序列号.
+    dataSeq.backfill(5);
+
+// 数据产品
+    DataProduct dataProduct = dataGenerator.build();
+
+// 数据包裹
+    PackageForm packageForm = this.datasForm();
+    DataPackage dataPackage = dataProduct.packaging(packageForm);
   }
 
 
@@ -92,7 +116,7 @@ public class ProductPackageTest {
     PackageForm tfPackage121 = new PackageForm();
 
     tfPackage121.setPackageName("autoPackageName");
-    tfPackage121.setIsBroadcast("false");
+    tfPackage121.setIsBroadcast(false);
 
     Receiver receiver1212 = new Receiver();
     receiver1212.setApplicationCode("DemoTopic");
@@ -109,7 +133,7 @@ public class ProductPackageTest {
     PackageForm tfPackage121 = new PackageForm();
 
     tfPackage121.setPackageName("autoPackageName222");
-    tfPackage121.setIsBroadcast("false");
+    tfPackage121.setIsBroadcast(false);
 
     Receiver receiver1212 = new Receiver();
     receiver1212.setApplicationCode("DemoTopic");
