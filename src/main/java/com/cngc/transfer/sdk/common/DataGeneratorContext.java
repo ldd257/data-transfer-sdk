@@ -2,7 +2,6 @@
 package com.cngc.transfer.sdk.common;
 
 
-
 import cn.hutool.json.JSONUtil;
 import com.cngc.transfer.sdk.form.GeneratorForm2;
 import lombok.Data;
@@ -38,7 +37,7 @@ public class DataGeneratorContext {
     /**
      * 获得实例
      */
-    public   DataGenerator getGenerator(String code){
+    public DataGenerator getGenerator(String code) {
         // 1,查询生成器
         String result = myRequestUtils.myRequestGet("/transfer/generators/" + code);
         generatorForm = JSONUtil.toBean(result, GeneratorForm2.class);
@@ -46,6 +45,17 @@ public class DataGeneratorContext {
         return dataGenerator;
     }
 
+    /**
+     * 创建数据生成器.
+     *
+     * @param generator 数据生成器对象
+     * @return 创建出的数据生成器
+     */
+    public DataGenerator createGenerator(DataGenerator generator) {
+        // TODO 实现数据生成器的保存逻辑
+
+        return null;
+    }
 
 
 }
