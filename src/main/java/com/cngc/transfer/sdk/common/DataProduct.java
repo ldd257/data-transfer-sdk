@@ -1,16 +1,14 @@
 package com.cngc.transfer.sdk.common;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.cngc.transfer.sdk.entity.TfProductEntity;
-import com.cngc.transfer.sdk.form.GeneratorForm2;
-import com.cngc.transfer.sdk.form.PackageBean;
+import com.cngc.transfer.sdk.constants.TfConstants;
 import com.cngc.transfer.sdk.form.PackageForm;
+import com.cngc.transfer.sdk.form.Receiver;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -21,79 +19,60 @@ import java.util.Map;
  * @date 2020-08-11 13:37:16
  */
 @Data
-@Component
 public class DataProduct {
 
-    @Autowired
-    private MyRequestUtils myRequestUtils;
-    @Autowired
-    private DataPackage dataPackage;
+  private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
-    private PackageBean packageBean;
+  private String id;
 
-    private TfProductEntity tfProductEntity;
-    private GeneratorForm2 generatorForm;
-    private DataProduct(){}
-    public DataProduct(GeneratorForm2 generatorForm, TfProductEntity tfProductEntity){
-        this.tfProductEntity = tfProductEntity;
-        this.generatorForm = generatorForm;
+  private String generatorCode;
+  private static final String PACKAGEURL = "/transfer/packages/";
+  /**
+   * 数据打包.
+   */
+  public DataPackage packaging(PackageForm packageBean) {
+    JSONObject beanJson = new JSONObject();
+    JSONObject broadcastReceiverJson = new JSONObject();
+    List<JSONObject> receiverJsonList = new ArrayList<>();
 
+    if (Boolean.TRUE.equals(packageBean.getIsBroadcast())) {
+
+      broadcastReceiverJson.put(TfConstants.ProcessConstants.APPLICATION_CODE
+          ,packageBean.getBroadcastReceiver().getApplicationCode());
+      broadcastReceiverJson.put(TfConstants.ProcessConstants.PROCESS_CODE
+          ,packageBean.getBroadcastReceiver().getProcessCode());
+      broadcastReceiverJson.put(TfConstants.ProcessConstants.IGNORE
+          ,packageBean.getBroadcastReceiver().getIgnore());
+    } else {
+      if (!packageBean.getReceivers().isEmpty()) {
+        for(Receiver receiver : packageBean.getReceivers()) {
+          JSONObject receiverJson = new JSONObject();
+          receiverJson.put(TfConstants.ProcessConstants.PLATFORM_CODE,receiver.getPlatformCode());
+          receiverJson.put(TfConstants.ProcessConstants.APPLICATION_CODE,receiver.getApplicationCode());
+          receiverJson.put(TfConstants.ProcessConstants.PROCESS_CODE,receiver.getProcessCode());
+          receiverJson.put(TfConstants.ProcessConstants.IGNORE,receiver.getIgnore());
+          receiverJsonList.add(receiverJson);
+        }
+      } else {
+        JSONObject receiverJson = new JSONObject();
+        receiverJson.put(TfConstants.ProcessConstants.PLATFORM_CODE,"");
+        receiverJson.put(TfConstants.ProcessConstants.APPLICATION_CODE,"");
+        receiverJson.put(TfConstants.ProcessConstants.PROCESS_CODE,"");
+        receiverJson.put(TfConstants.ProcessConstants.IGNORE,false);
+        receiverJsonList.add(receiverJson);
+      }
     }
-    /**
-     *
-     */
-    public DataPackage packaging(PackageForm packageBean){
-
-
-            /*// 获取地址
-
-            // 下载文件
-
-            // 打包
-
-            // 上传
-
-            // 返回url*/
-
-
-            Map<String, Object> hashMap = new HashMap<>();
-            Map<String, Object> hashMap2 = new HashMap<>();
-            Map<String, Object> hashMap3 = new HashMap<>();
-            if (packageBean.getIsBroadcast()){
-                hashMap2.put("application_code",packageBean.getBroadcastReceiver().getApplicationCode());
-                hashMap2.put("process_code",packageBean.getBroadcastReceiver().getProcessCode());
-            }else {
-                if (packageBean.getReceivers().size() > 0){
-                    hashMap3.put("platform_code",packageBean.getReceivers().get(0).getPlatformCode());
-                    hashMap3.put("application_code",packageBean.getReceivers().get(0).getApplicationCode());
-                    hashMap3.put("process_code",packageBean.getReceivers().get(0).getProcessCode());
-                }else{
-                    hashMap3.put("platform_code","");
-                    hashMap3.put("application_code","");
-                    hashMap3.put("process_code","");
-                }
-
-            }
-            hashMap.put("is_broadcast",packageBean.getIsBroadcast());
-            hashMap.put("receivers",hashMap3);
-            hashMap.put("broadcast_receiver",hashMap2);
-            hashMap.put("package_name",packageBean.getPackageName());
-            hashMap.put("product_id",tfProductEntity.getId().toString());
-            String result = myRequestUtils.myRequestPost("/transfer/products/"+ generatorForm.getGenerator_code() +"/packaged", hashMap);
-            Map packageMap = JSONUtil.toBean(result, Map.class);
-            hashMap.put("id", (Integer)packageMap.get("id"));
-            String result2 = myRequestUtils.myRequestPost("/transfer/packages/"+ generatorForm.getGenerator_code() +"/packing", hashMap);
-
-
-            // bean 上传 获取url
-            // 返回json
-
-            // 保存数据生成
-            dataPackage.setGeneratorForm(generatorForm);
-            // dataPackage.setProductId(tfProductEntity.getId());
-            dataPackage.setZipUrl(result2);
-            return dataPackage;
-
-    }
+    beanJson.put(TfConstants.ProcessConstants.IS_BROADCAST,packageBean.getIsBroadcast());
+    beanJson.put(TfConstants.ProcessConstants.RECEIVERS,receiverJsonList);
+    beanJson.put(TfConstants.ProcessConstants.BROADCAST_RECEIVER,broadcastReceiverJson);
+    beanJson.put(TfConstants.ProcessConstants.PACKAGE_NAME,packageBean.getPackageName());
+    beanJson.put(TfConstants.ProcessConstants.CONDITION,JSONUtil.toJsonStr(packageBean.getCondition()));
+    beanJson.put(TfConstants.ProcessConstants.PRODUCT_ID,id);
+    String result = myRequestUtils.myRequestPost(PACKAGEURL+ generatorCode +"/packing", beanJson);
+    DataPackage dataPackage = "".equals(result) ? new DataPackage() : JSONUtil.toBean(result, DataPackage.class);
+    dataPackage.setMyRequestUtils(myRequestUtils);
+    // 保存数据生成
+    return dataPackage;
+  }
 
 }

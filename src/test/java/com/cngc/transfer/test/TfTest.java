@@ -8,7 +8,6 @@ import com.cngc.transfer.sdk.common.MyRequestUtils;
 import com.cngc.transfer.sdk.entity.TfProductEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,8 +17,8 @@ import java.util.HashMap;
 @SpringBootTest(classes = ProductPackageTest.class)
 public class TfTest {
 
-  @Autowired
-  private MyRequestUtils myRequestUtils;
+
+  private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
   @Test
   public void httpGetTest(){

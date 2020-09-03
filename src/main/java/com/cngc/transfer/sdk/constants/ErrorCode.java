@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 /**
  * 错误编码公共接口
- * 
+ *
  * Copyright: Copyright (c) 2020  cngc
- * 
+ *
  * @ClassName: ErrorCode.java
- * @Description: 
+ * @Description:
  * @version: v1.0.0
  * @author: liuzl
  * @date: 2017年4月24日   下午6:30:43 

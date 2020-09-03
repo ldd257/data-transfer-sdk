@@ -9,11 +9,7 @@
 package com.cngc.transfer.sdk.form;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * 应用表单
@@ -22,23 +18,12 @@ import java.util.List;
  */
 @Data
 public class GeneratorForm {
-
-
-    private String generatorTypeCode;
-
-    private String orderTypeCode;
-
-    private String generatorCode;
-
-    private List<DataForm> datas;
-
-    @JsonIgnore
-    private String dataJson;
-
-    private String statusCode;
-
-    @JsonIgnore
-    private Date createTime;
+    private String generator_type;
+    private String sequence_code;
+    private String generator_code;
+    private String datas;
+    private String data_json;
+    private String status;
 
 
 }

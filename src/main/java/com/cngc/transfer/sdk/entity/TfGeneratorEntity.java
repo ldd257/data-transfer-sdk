@@ -8,17 +8,17 @@ import java.util.Date;
 
 /**
  * 生成器表
- * 
+ *
  * @author ldd
  * @email ldd@gmail.com
  * @date 2020-08-11 13:37:15
  */
 @Data
 public class TfGeneratorEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 *
 	 */
 	private Long id;
 	/**

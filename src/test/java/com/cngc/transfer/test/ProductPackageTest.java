@@ -17,22 +17,30 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductPackageTest.class)
 public class ProductPackageTest {
 
 
   @Test
-  public void testSdk(){
+  public void testSdk()throws Exception{
     DataGeneratorContext context = DataGeneratorContextHolder.getContext();
     DataGenerator dataGenerator = context.getGenerator("GE00001");
 
     // 模拟数据
     UserDemo datas = this.datas2();
 //    DataForm datas = this.datas3();
-    dataGenerator.append(datas);
+    InputStream inputStream = new FileInputStream("D:\\myroot\\json202008181034002.json");
 
-    DataSequence dataSequence = dataGenerator.getDataSequence();
+    // 追加数据
+    dataGenerator.append(inputStream, "json");
+
+    DataSequence dataSequence = dataGenerator.getSequence();
 
 
     dataSequence.skip();
@@ -49,30 +57,7 @@ public class ProductPackageTest {
 
     PackageForm packageForm = this.datasForm();
     DataPackage packaged = dataProduction.packaging(packageForm);
-    System.out.println("result=="+packaged.getZipUrl());
     // 获取url
-  }
-
-
-  public void xxTest(){
-    // 从数据生成器上下文持有者中获取数据生成器上下文
-    DataGeneratorContext context = DataGeneratorContextHolder.getContext();
-// 使用数据生成器上下文获取数据生成器
-    DataGenerator dataGenerator = context.getGenerator("code");
-    UserDemo datas = this.datas2();
-    dataGenerator.append(datas);
-// 数据序列
-    DataSequence dataSeq = dataGenerator.getSequence();
-    dataSeq.skip();
-// 回填参数为空,则默认回填第一个间隔的序列号.
-    dataSeq.backfill(5);
-
-// 数据产品
-    DataProduct dataProduct = dataGenerator.build();
-
-// 数据包裹
-    PackageForm packageForm = this.datasForm();
-    DataPackage dataPackage = dataProduct.packaging(packageForm);
   }
 
 
@@ -85,32 +70,7 @@ public class ProductPackageTest {
   }
 
 
-  private DataForm datas3(){
-    // 模拟数据
-    DataForm dataForm = new DataForm();
-    dataForm.setData_type_code("ccc");
-    dataForm.setValue("vvvvvv");
-    return dataForm;
-  }
 
-
-  private PackageBean datas() {
-    // 模拟数据
-    PackageBean tfPackage121 = new PackageBean();
-
-    tfPackage121.setPackageName("autoPackageName");
-    tfPackage121.setIsBroadcast("false");
-
-    Receiver receiver1212 = new Receiver();
-    receiver1212.setApplicationCode("DemoTopic");
-    receiver1212.setPlatformCode("platCode");
-    receiver1212.setProcessCode("addUser");
-
-    tfPackage121.setReceiver(receiver1212);
-    tfPackage121.setBroadcastReceiver(null);
-
-    return tfPackage121;
-  }
   private PackageForm datasForm() {
     // 模拟数据
     PackageForm tfPackage121 = new PackageForm();
@@ -118,33 +78,21 @@ public class ProductPackageTest {
     tfPackage121.setPackageName("autoPackageName");
     tfPackage121.setIsBroadcast(false);
 
-    Receiver receiver1212 = new Receiver();
-    receiver1212.setApplicationCode("DemoTopic");
-    receiver1212.setPlatformCode("platCode");
-    receiver1212.setProcessCode("addUser");
+    List<Receiver> receivers = new ArrayList<>();
+    Receiver receiver1 = new Receiver();
+    receiver1.setApplicationCode("DemoTopic");
+    receiver1.setPlatformCode("TEST_PLATFORM_CODE");
+    receiver1.setProcessCode("addUser");
 
-    tfPackage121.setReceivers(receiver1212);
+    Receiver receiver2 = new Receiver();
+    receiver2.setApplicationCode("testCode");
+    receiver2.setPlatformCode("TEST_PLATFORM_CODE");
+    receiver2.setProcessCode("addUser");
+
+    tfPackage121.setReceivers(receivers);
     tfPackage121.setBroadcastReceiver(null);
 
     return tfPackage121;
   }
-  private PackageForm datasForm2() {
-    // 模拟数据
-    PackageForm tfPackage121 = new PackageForm();
-
-    tfPackage121.setPackageName("autoPackageName222");
-    tfPackage121.setIsBroadcast(false);
-
-    Receiver receiver1212 = new Receiver();
-    receiver1212.setApplicationCode("DemoTopic");
-    receiver1212.setPlatformCode("platCode");
-    receiver1212.setProcessCode("addUser");
-
-    tfPackage121.setReceivers(receiver1212);
-    tfPackage121.setBroadcastReceiver(null);
-
-    return tfPackage121;
-  }
-
 
 }

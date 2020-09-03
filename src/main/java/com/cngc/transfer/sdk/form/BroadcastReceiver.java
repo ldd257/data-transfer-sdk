@@ -19,4 +19,5 @@ public class BroadcastReceiver {
     private String processCode;
 
     private Condition condition;
+    private Boolean ignore = false;
 }

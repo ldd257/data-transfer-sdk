@@ -1,7 +1,6 @@
 package com.cngc.transfer.sdk.common;
 
 
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ public class DataGeneratorContextHolder implements ApplicationContextAware {
   private static ApplicationContext applicationContext;
 
   @Override
-  public void setApplicationContext(ApplicationContext app) throws BeansException {
+  public void setApplicationContext(ApplicationContext app) {
     DataGeneratorContextHolder.applicationContext = app;
   }
 

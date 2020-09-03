@@ -6,7 +6,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DataRun {
-    // 允许注解有参数
-    Class<?>  value() ;
-    boolean require() default true;
+
 }

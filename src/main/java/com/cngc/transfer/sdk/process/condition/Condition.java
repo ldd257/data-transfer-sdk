@@ -23,7 +23,7 @@ public interface Condition {
      * @param condition 条件
      * @return 合并后的条件
      */
-    default Condition or(Condition condition) {
-        return null;
-    }
+//    default Condition or(Condition condition) {
+//        return null;
+//    }
 }

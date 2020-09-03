@@ -40,12 +40,8 @@ public class PackageForm {
      * 包名
      */
     private String packageName;
+    private String code;
+    private String id;
+    private String condition;
 
-
-
-    public void setReceivers(Receiver receivers) {
-        List<Receiver> rece = new ArrayList<>();
-        rece.add(receivers);
-        this.receivers = rece;
-    }
 }

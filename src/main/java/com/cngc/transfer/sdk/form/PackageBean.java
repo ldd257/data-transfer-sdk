@@ -22,24 +22,14 @@ import java.util.Date;
 public class PackageBean {
 
     /**
-     * 接收者
-     */
-    private Receiver receiver;
-
-    /**
-     * 广播接收者
-     */
-    private BroadcastReceiver broadcastReceiver;
-
-    /**
-     * 是否广播
-     */
-    private String isBroadcast;
-
-    /**
      * 包名
      */
     private String packageName;
+
+    /**
+     * 包code
+     */
+    private String code;
     /**
      * 文件url
      */
@@ -48,10 +38,6 @@ public class PackageBean {
      * 创建时间
      */
     @JsonFormat(pattern="yyyy-MM-dd'T'HH-mm-ss.SSSXXX")
-    private Date createTime;
+    private String createTime;
 
-    /**
-     * 产品主键
-     */
-    private String productId;
 }

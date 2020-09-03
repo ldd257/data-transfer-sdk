@@ -17,7 +17,6 @@ public class DataSequenceContext {
      */
     public DataSequence getDataSequence(String code) {
         // TODO 实现根据数据序列编码获取数据序列的逻辑
-
         return null;
     }
 
@@ -29,7 +28,6 @@ public class DataSequenceContext {
      */
     public DataSequence createDataSequence(DataSequence dataSequence) {
         // TODO 实现创建数据序列逻辑
-
         return null;
     }
 }

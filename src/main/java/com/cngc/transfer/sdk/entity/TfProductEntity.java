@@ -9,17 +9,17 @@ import java.util.Date;
 
 /**
  * 产品表
- * 
+ *
  * @author ldd
  * @email ldd@gmail.com
  * @date 2020-08-11 13:37:16
  */
 @Data
 public class TfProductEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 *
 	 */
 	private Long id;
 	/**

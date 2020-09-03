@@ -2,10 +2,11 @@
 package com.cngc.transfer.sdk.common;
 
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.cngc.transfer.sdk.form.GeneratorForm2;
+import com.cngc.transfer.sdk.form.GeneratorBean;
+import com.cngc.transfer.sdk.form.GeneratorForm;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -20,19 +21,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataGeneratorContext {
 
-    @Autowired
-    private DataGenerator dataGenerator;
-    @Autowired
-    private MyRequestUtils myRequestUtils;
 
-    /**
-     * 数据序列.
-     */
-    @Autowired
-    private DataSequence dataSequence;
-
-    private GeneratorForm2 generatorForm;
-
+    private MyRequestUtils myRequestUtils = new MyRequestUtils();
 
     /**
      * 获得实例
@@ -40,21 +30,27 @@ public class DataGeneratorContext {
     public DataGenerator getGenerator(String code) {
         // 1,查询生成器
         String result = myRequestUtils.myRequestGet("/transfer/generators/" + code);
-        generatorForm = JSONUtil.toBean(result, GeneratorForm2.class);
-        dataGenerator.setGeneratorForm(generatorForm);
+        DataGenerator dataGenerator = JSONUtil.toBean(result, DataGenerator.class);
+        dataGenerator.setGeneratorCode(dataGenerator.getGeneratorCode());
+        dataGenerator.setMyRequestUtils(myRequestUtils);
         return dataGenerator;
     }
 
     /**
-     * 创建数据生成器.
-     *
-     * @param generator 数据生成器对象
-     * @return 创建出的数据生成器
+     * 创建生成器.
      */
-    public DataGenerator createGenerator(DataGenerator generator) {
-        // TODO 实现数据生成器的保存逻辑
-
-        return null;
+    public GeneratorBean createGenerator(GeneratorBean generatorBean) {
+        GeneratorForm generatorForm = new GeneratorForm();
+        generatorForm.setGenerator_code(generatorBean.getGeneratorCode());
+        generatorForm.setSequence_code(generatorBean.getSequenceCode());
+        generatorForm.setGenerator_type(generatorBean.getGeneratorType());
+        String generatorJson = JSONUtil.toJsonStr(generatorForm);
+        String result = myRequestUtils.myRequestPost("/transfer/generators",generatorJson);
+        JSONObject parseObj = JSONUtil.parseObj(result);
+        generatorBean.setGeneratorType(parseObj.getStr("generator_type"));
+        generatorBean.setDatas(parseObj.getStr("datas"));
+        generatorBean.setStatus(parseObj.getStr("status"));
+        return generatorBean;
     }
 
 

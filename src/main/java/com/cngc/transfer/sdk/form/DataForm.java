@@ -19,8 +19,10 @@ import lombok.Data;
 @Data
 public class DataForm {
 
-    private String data_type_code;
+    private String code;
 
-    private String value;
+    private String data_type;
+
+    private String data_content;
 
 }

@@ -5,11 +5,11 @@ import com.cngc.transfer.sdk.constants.ErrorCode;
 /**
  * 消息异常
  * .<br/>
- * 
+ *
  * Copyright: Copyright (c) 2020  cngc
- * 
+ *
  * @ClassName: RocketMQException
- * @Description: 
+ * @Description:
  * @version: v1.0.0
  * @author: yuan
  * @date: 2018年3月2日 下午11:01:41
@@ -21,8 +21,6 @@ import com.cngc.transfer.sdk.constants.ErrorCode;
 public class RocketMQException extends AppException{
 
 	private static final long serialVersionUID = 1L;
-	
-	
 	/**
 	 * 无参构造函数
 	 */
@@ -35,7 +33,7 @@ public class RocketMQException extends AppException{
 	public RocketMQException(ErrorCode errorType) {
 		super(errorType);
 	}
-	
+
 	public RocketMQException(ErrorCode errorCode, String ... errMsg) {
 		super(errorCode, errMsg);
 	}
@@ -48,7 +46,7 @@ public class RocketMQException extends AppException{
 	public RocketMQException(ErrorCode errorCode, String errMsg,Boolean isTransfer) {
 		super(errorCode, errMsg,isTransfer);
 	}
-	
+
 	public RocketMQException(ErrorCode errCode, Throwable cause,String ... errMsg) {
 		super(errCode,cause, errMsg);
 	}
